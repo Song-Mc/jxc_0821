@@ -29,4 +29,6 @@ public interface GoodsService {
     ServiceVO saveStock(Integer goodsId,Integer inventoryQuantity,double purchasingPrice);
 
     Map<String,Object> listAlarm();
+
+    Map<String, Object> listInventory(Integer page, Integer rows, String codeOrName, Integer goodsTypeId);
 }

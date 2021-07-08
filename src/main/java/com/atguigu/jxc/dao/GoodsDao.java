@@ -3,7 +3,9 @@ package com.atguigu.jxc.dao;
 import com.atguigu.jxc.entity.Goods;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @description 商品信息
@@ -38,4 +40,7 @@ public interface GoodsDao {
 
     // 查询当前库存小于最小库存的商品
     List<Goods> getGoodsAlarm();
+
+    // 查询当前库存（可根据商品类别、商品编码或名称搜索）
+    List<Goods> getGoodsListByMap(@Param("offSet") int offSet,@Param("rows") Integer rows, @Param("codeOrName") String codeOrName,@Param("goodsTypeId") Integer goodsTypeId);
 }

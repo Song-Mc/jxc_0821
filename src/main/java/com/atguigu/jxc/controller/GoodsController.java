@@ -7,6 +7,7 @@ import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,11 +31,11 @@ public class GoodsController {
      * @param goodsTypeId 商品类别ID
      * @return
      */
-  /*  @RequestMapping("/listInventory")
+    @RequestMapping(value = "/listInventory",method = RequestMethod.POST)
     @RequiresPermissions(value="当前库存查询")
     public Map<String,Object> listInventory(Integer page, Integer rows, String codeOrName, Integer goodsTypeId) {
         return goodsService.listInventory(page, rows, codeOrName, goodsTypeId);
-    }*/
+    }
 
     /**
      * 分页查询商品信息

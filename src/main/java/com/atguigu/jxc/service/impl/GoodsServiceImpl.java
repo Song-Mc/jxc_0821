@@ -25,10 +25,10 @@ public class GoodsServiceImpl implements GoodsService {
     private LogService logService;
     @Autowired
     private GoodsDao goodsDao;
-/*    @Autowired
-    private SaleListGoodsService saleListGoodsService;
-    @Autowired
-    private CustomerReturnListGoodsService customerReturnListGoodsService;*/
+//    @Autowired
+//    private SaleListGoodsService saleListGoodsService;
+//    @Autowired
+//    private CustomerReturnListGoodsService customerReturnListGoodsService;
 
     @Override
     public Map<String, Object> list(Integer page, Integer rows, String goodsName, Integer goodsTypeId) {
@@ -224,5 +224,30 @@ public class GoodsServiceImpl implements GoodsService {
         logService.save(new Log(Log.SELECT_ACTION, "查询库存报警商品信息"));
 
         return map;
+    }
+
+    @Override
+    public Map<String, Object> listInventory(Integer page, Integer rows, String codeOrName, Integer goodsTypeId) {
+        Map<String,Object> map = new HashMap<>();
+
+        page = page == 0 ? 1 : page;
+        int offSet = (page - 1) * rows;
+
+        List<Goods> goodsList = goodsDao.getGoodsListByMap(offSet, rows, codeOrName,goodsTypeId);
+
+//                for (Goods goods : goodsList) {
+//            // 销售总量等于销售单据的销售数据减去退货单据的退货数据
+//            goods.setSaleTotal(saleListGoodsService.getSaleTotalByGoodsId(goods.getGoodsId())
+//                    - customerReturnListGoodsService.getCustomerReturnTotalByGoodsId(goods.getGoodsId()));
+//
+//        }
+
+        map.put("rows", goodsList);
+        map.put("total", goodsDao.getHasInventoryQuantityCount(codeOrName));
+
+        logService.save(new Log(Log.SELECT_ACTION, "分页查询商品信息（有库存）"));
+        return map;
+
+
     }
 }
