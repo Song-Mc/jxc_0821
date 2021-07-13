@@ -6,8 +6,10 @@ import com.atguigu.jxc.domain.ServiceVO;
 import com.atguigu.jxc.domain.SuccessCode;
 import com.atguigu.jxc.entity.Goods;
 import com.atguigu.jxc.entity.Log;
+import com.atguigu.jxc.service.CustomerReturnListGoodsService;
 import com.atguigu.jxc.service.GoodsService;
 import com.atguigu.jxc.service.LogService;
+import com.atguigu.jxc.service.SaleListGoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,10 +27,10 @@ public class GoodsServiceImpl implements GoodsService {
     private LogService logService;
     @Autowired
     private GoodsDao goodsDao;
-//    @Autowired
-//    private SaleListGoodsService saleListGoodsService;
-//    @Autowired
-//    private CustomerReturnListGoodsService customerReturnListGoodsService;
+    @Autowired
+    private SaleListGoodsService saleListGoodsService;
+    @Autowired
+    private CustomerReturnListGoodsService customerReturnListGoodsService;
 
     @Override
     public Map<String, Object> list(Integer page, Integer rows, String goodsName, Integer goodsTypeId) {
@@ -235,12 +237,12 @@ public class GoodsServiceImpl implements GoodsService {
 
         List<Goods> goodsList = goodsDao.getGoodsListByMap(offSet, rows, codeOrName,goodsTypeId);
 
-//                for (Goods goods : goodsList) {
-//            // 销售总量等于销售单据的销售数据减去退货单据的退货数据
-//            goods.setSaleTotal(saleListGoodsService.getSaleTotalByGoodsId(goods.getGoodsId())
-//                    - customerReturnListGoodsService.getCustomerReturnTotalByGoodsId(goods.getGoodsId()));
-//
-//        }
+                for (Goods goods : goodsList) {
+            // 销售总量等于销售单据的销售数据减去退货单据的退货数据   TODO 返回不唯一
+            goods.setSaleTotal(saleListGoodsService.getSaleTotalByGoodsId(goods.getGoodsId())
+                    - customerReturnListGoodsService.getCustomerReturnTotalByGoodsId(goods.getGoodsId()));
+
+        }
 
         map.put("rows", goodsList);
         map.put("total", goodsDao.getHasInventoryQuantityCount(codeOrName));
