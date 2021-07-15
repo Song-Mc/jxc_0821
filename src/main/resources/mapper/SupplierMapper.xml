@@ -6,24 +6,24 @@
 <mapper namespace="com.atguigu.jxc.dao.SupplierDao">
 
     <resultMap id="BaseResultMap" type="com.atguigu.jxc.entity.Supplier">
-        <result column="supplier_id" property="supplierId" jdbcType="INTEGER" />
-        <result column="supplier_name" property="supplierName" jdbcType="VARCHAR" />
-        <result column="contacts" property="contacts" jdbcType="VARCHAR" />
-        <result column="phone_number" property="phoneNumber" jdbcType="VARCHAR" />
-        <result column="address" property="address" jdbcType="VARCHAR" />
-        <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+        <result column="supplier_id" property="supplierId" jdbcType="INTEGER"/>
+        <result column="supplier_name" property="supplierName" jdbcType="VARCHAR"/>
+        <result column="contacts" property="contacts" jdbcType="VARCHAR"/>
+        <result column="phone_number" property="phoneNumber" jdbcType="VARCHAR"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
     </resultMap>
 
     <select id="getSupplierList" resultMap="BaseResultMap">
         SELECT
-            t_supplier.supplier_id,
-            t_supplier.supplier_name,
-            t_supplier.contacts,
-            t_supplier.phone_number,
-            t_supplier.address,
-            t_supplier.remarks
+        t_supplier.supplier_id,
+        t_supplier.supplier_name,
+        t_supplier.contacts,
+        t_supplier.phone_number,
+        t_supplier.address,
+        t_supplier.remarks
         FROM
-            t_supplier
+        t_supplier
         <where>
             <if test="supplierName != null and supplierName != ''">
                 t_supplier.supplier_name LIKE CONCAT('%', #{supplierName} ,'%')
@@ -34,7 +34,7 @@
 
     <select id="getSupplierCount" resultType="java.lang.Integer">
         SELECT
-          COUNT(*)
+        COUNT(*)
         FROM
         t_supplier
         <where>
@@ -44,7 +44,8 @@
         </where>
     </select>
 
-    <insert id="saveSupplier" useGeneratedKeys="true" keyProperty="supplierId" parameterType="com.atguigu.jxc.entity.Supplier">
+    <insert id="saveSupplier" useGeneratedKeys="true" keyProperty="supplierId"
+            parameterType="com.atguigu.jxc.entity.Supplier">
         INSERT INTO t_supplier
         (supplier_name, contacts, phone_number, address, remarks)
         VALUES (#{supplierName}, #{contacts}, #{phoneNumber}, #{address}, #{remarks})
@@ -83,6 +84,22 @@
         FROM
             t_supplier
         WHERE supplier_id = #{supplierId}
+    </select>
+    <select id="getComboboxList" resultMap="BaseResultMap">
+        SELECT
+          supplier_id,
+          supplier_name,
+          contacts,
+          phone_number,
+          address,
+          remarks
+        FROM
+          t_supplier
+        where
+            <if test="q != '' and q != null">
+                supplier_name like concat('%',#{q},'%')
+            </if>
+
     </select>
 
     <delete id="deleteSupplier" parameterType="java.lang.Integer">

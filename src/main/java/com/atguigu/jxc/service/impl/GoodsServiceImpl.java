@@ -237,12 +237,12 @@ public class GoodsServiceImpl implements GoodsService {
 
         List<Goods> goodsList = goodsDao.getGoodsListByMap(offSet, rows, codeOrName,goodsTypeId);
 
-                for (Goods goods : goodsList) {
-            // 销售总量等于销售单据的销售数据减去退货单据的退货数据   TODO 返回不唯一
-            goods.setSaleTotal(saleListGoodsService.getSaleTotalByGoodsId(goods.getGoodsId())
-                    - customerReturnListGoodsService.getCustomerReturnTotalByGoodsId(goods.getGoodsId()));
-
-        }
+//                for (Goods goods : goodsList) {
+//            // 销售总量等于销售单据的销售数据减去退货单据的退货数据   TODO 返回不唯一
+//            goods.setSaleTotal(saleListGoodsService.getSaleTotalByGoodsId(goods.getGoodsId())
+//                    - customerReturnListGoodsService.getCustomerReturnTotalByGoodsId(goods.getGoodsId()));
+//
+//        }
 
         map.put("rows", goodsList);
         map.put("total", goodsDao.getHasInventoryQuantityCount(codeOrName));
