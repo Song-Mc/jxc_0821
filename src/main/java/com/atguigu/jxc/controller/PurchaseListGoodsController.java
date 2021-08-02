@@ -6,10 +6,7 @@ import com.atguigu.jxc.entity.PurchaseListGoods;
 import com.atguigu.jxc.service.PurchaseListGoodsService;
 import org.springframework.aop.scope.ScopedProxyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -29,6 +26,13 @@ public class PurchaseListGoodsController {
 
     @Autowired
     private PurchaseListGoodsService purchaseListGoodsService;
+
+    @PostMapping("/save/{purchaseNumber}")
+    public ServiceVO save(@PathVariable(value = "purchaseNumber") PurchaseList purchaseList, String purchaseListGoodsStr){
+
+        return this.purchaseListGoodsService.save(purchaseList,purchaseListGoodsStr);
+
+    }
 
     @PostMapping("/list")
     public Map<String,Object> list(String purchaseNumber,

@@ -2,6 +2,7 @@ package com.atguigu.jxc.service.impl;
 
 import com.atguigu.jxc.dao.PurchaseListDao;
 import com.atguigu.jxc.dao.PurchaseListGoodsDao;
+import com.atguigu.jxc.domain.ServiceVO;
 import com.atguigu.jxc.entity.PurchaseList;
 import com.atguigu.jxc.entity.PurchaseListGoods;
 import com.atguigu.jxc.service.PurchaseListGoodsService;
@@ -53,6 +54,13 @@ public class PurchaseListGoodsServiceImpl implements PurchaseListGoodsService {
         this.purchaseListGoodsDao.delete(purchaseListId);
         this.purchaseListDao.delete(purchaseListId);
         return true;
+
+    }
+
+    @Override
+    public ServiceVO save(PurchaseList purchaseList, String purchaseListGoodsStr) {
+
+        return this.purchaseListDao.save(purchaseList);
 
     }
 }

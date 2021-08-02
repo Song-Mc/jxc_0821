@@ -1,5 +1,6 @@
 package com.atguigu.jxc.service;
 
+import com.atguigu.jxc.domain.ServiceVO;
 import com.atguigu.jxc.entity.PurchaseList;
 import com.atguigu.jxc.entity.PurchaseListGoods;
 
@@ -18,4 +19,6 @@ public interface PurchaseListGoodsService {
     List<PurchaseListGoods> goodsList(Integer purchaseListId);
 
     Boolean delete(Integer purchaseListId);
+
+    ServiceVO save(PurchaseList purchaseList, String purchaseListGoodsStr);
 }
