@@ -85,6 +85,24 @@
         WHERE
             customer_id = #{customerId}
     </select>
+    <select id="getComboboxList" resultMap="BaseResultMap">
+        SELECT
+            t_customer.customer_id,
+            t_customer.customer_name,
+            t_customer.contacts,
+            t_customer.phone_number,
+            t_customer.address,
+            t_customer.remarks
+        from
+            t_customer
+        <where>
+            <if test="q != null and q != ''">
+                t_customer.customer_name like concat('%',#{q},'%')
+            </if>
+        </where>
+
+
+    </select>
 
     <delete id="deleteCustomer" parameterType="java.lang.Integer">
         DELETE FROM

@@ -6,6 +6,7 @@ import com.atguigu.jxc.service.CustomerService;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,6 +22,20 @@ public class CustomerController {
 
     @Autowired
     private CustomerService customerService;
+
+    /**
+     *
+     * 客户下拉列表
+     * @author SongMc
+     * @date 14:44 2022/8/25
+     * @param q
+     * @return [java.lang.String]
+     **/
+    @PostMapping("/getComboboxList")
+    public List<Customer> getComboboxList(String q){
+
+        return customerService.getComboboxList(q);
+    }
 
 
     /**

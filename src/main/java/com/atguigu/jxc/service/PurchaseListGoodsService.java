@@ -17,4 +17,11 @@ public interface PurchaseListGoodsService {
 	Map<String,Object> getListBy(String purchaseNumber, Integer supplierId, Integer state, String sTime, String eTime);
 
 	Map<String, Object> getGoodsList(Integer purchaseListId);
+
+	ServiceVO delete(Integer purchaseListId);
+
+	ServiceVO updateState(Integer purchaseListId);
+
+	String count(String sTime, String eTime, Integer goodsTypeId, String codeOrName);
+
 }

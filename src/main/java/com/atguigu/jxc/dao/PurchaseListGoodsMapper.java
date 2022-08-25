@@ -23,4 +23,12 @@ public interface PurchaseListGoodsMapper {
 	List<PurchaseList> getListBy(String purchaseNumber, Integer supplierId, Integer state, String sTime, String eTime);
 
 	List<PurchaseListGoods> getGoodsList(Integer purchaseListId);
+
+	Integer delete(Integer purchaseListId);
+
+	Integer deleteListGoods(Integer purchaseListId);
+
+	void updateState(Integer purchaseListId);
+
+	List<PurchaseListGoods> getGoodsBy(Integer purchaseListId, Integer goodsTypeId, @Param("codeOrName") String codeOrName);
 }
