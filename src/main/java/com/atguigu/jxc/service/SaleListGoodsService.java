@@ -20,4 +20,8 @@ public interface SaleListGoodsService {
 	ServiceVO delete(Integer saleListId);
 
 	ServiceVO updateState(Integer saleListId);
+
+	String getSaleDataByDay(String sTime, String eTime);
+
+	String getSaleDataByMonth(String sTime, String eTime);
 }

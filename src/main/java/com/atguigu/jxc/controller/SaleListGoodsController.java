@@ -4,9 +4,11 @@ import com.atguigu.jxc.domain.ServiceVO;
 import com.atguigu.jxc.entity.SaleList;
 import com.atguigu.jxc.service.SaleListGoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -21,6 +23,31 @@ public class SaleListGoodsController {
 
 	@Autowired
 	private SaleListGoodsService saleListGoodsService;
+
+
+
+	@RequestMapping(value = "/getSaleDataByMonth",method = RequestMethod.POST)
+	public String getSaleDataByMonth(String sTime,String eTime){
+
+		return saleListGoodsService.getSaleDataByMonth(sTime,eTime);
+
+	}
+
+	/**
+	 *
+	 * 按日统计接口
+	 * @author SongMc
+	 * @date 16:50 2022/9/16
+	 * @param sTime,eTime
+	 * @return [java.lang.String, java.lang.String]
+	 **/
+	@RequestMapping(value = "/getSaleDataByDay",method = RequestMethod.POST)
+	public String getSaleDataByDay(String sTime,String eTime){
+
+		return saleListGoodsService.getSaleDataByDay(sTime,eTime);
+
+	}
+
 
 	// 客户退货单保存 todo
 

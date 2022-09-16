@@ -1,7 +1,9 @@
 package com.atguigu.jxc.dao;
 
+import com.atguigu.jxc.entity.SaleData;
 import com.atguigu.jxc.entity.SaleList;
 import com.atguigu.jxc.entity.SaleListGoods;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -26,4 +28,8 @@ public interface SaleListGoodsMapper {
 	void deleteGoods(Integer saleListId);
 
 	void updateState(Integer saleListId);
+
+	List<SaleData> getSaleDataByDay(@Param("sTime")String sTime, @Param("eTime") String eTime);
+
+	List<SaleData> getSaleDataByMonth(@Param("sTime") String sTime,@Param("eTime") String eTime);
 }
